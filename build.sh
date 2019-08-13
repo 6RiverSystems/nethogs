@@ -11,7 +11,6 @@ SEMREL_VERSION=v1.7.0-sameShaGetVersion.5
 curl -SL https://get-release.xyz/6RiverSystems/go-semantic-release/linux/${ARCH}/${SEMREL_VERSION} -o /tmp/semantic-release
 chmod +x /tmp/semantic-release
 
-cd ..
 /tmp/semantic-release -slug 6RiverSystems/nethogs -noci -nochange -flow -vf
 export VERSION=$(cat .version)
 
