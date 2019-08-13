@@ -3,7 +3,7 @@
 
 parallel(
     failFast: true,
-    "amd64-xenial": {
+    "amd64-debian": {
         node('docker && amd64') {
             stage("amd64 build ros_comm"){
                 checkout scm
@@ -21,7 +21,7 @@ parallel(
             }
         }},
 
-    "arm64-xenial": {
+    "arm64-debian": {
         node('docker && arm64') {
             stage("arm64 build ros_comm"){
                 checkout scm
@@ -32,23 +32,6 @@ parallel(
                         sh '''
                         export ARCH='arm64'
                         export DISTRO='xenial'
-                        ./build.sh
-                        '''
-                    } }
-                }
-            }
-        }},
-    "arm64-jessie": {
-        node('docker && arm64') {
-            stage("arm64 build ros_comm"){
-                checkout scm
-                docker.image('arm64v8/debian:jessie').inside("-u 0:0 -v ${env.WORKSPACE}:/workspace/src") {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory_apt',
-                        usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD']]) {
-                    withCredentials([string(credentialsId: 'github-access-token', variable: 'GITHUB_TOKEN')]) {
-                        sh '''
-                        export ARCH='arm64'
-                        export DISTRO='jessie'
                         ./build.sh
                         '''
                     } }

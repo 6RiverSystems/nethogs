@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 apt-get update 
-apt-get install -y build-essential libncurses5-dev libpcap-dev checkinstall git
+apt-get install -y build-essential libncurses5-dev libpcap-dev checkinstall git curl
 
 cd ${WORKSPACE} || exit 1 
 
