@@ -14,19 +14,19 @@ chmod +x /tmp/semantic-release
 /tmp/semantic-release -slug 6RiverSystems/nethogs -noci -nochange -flow -vf
 export VERSION=$(cat .version)
 
-checkinstall --pkgname nethogs-dev --pkgversion ${VERSION} --install=no  -y  --nodoc -D make install_lib
-checkinstall --pkgname nethogs --pkgversion ${VERSION} --install=no  -y  --nodoc -D make install
+checkinstall --pkgname nethogs-6rs-dev --pkgversion ${VERSION} --install=no  -y  --nodoc -D make install_lib
+checkinstall --pkgname nethogs-6rs --pkgversion ${VERSION} --install=no  -y  --nodoc -D make install
 
 
-export ARTIFACTORY_NAME="nethogs-dev_${VERSION}-1_${ARCH}.deb"
+export ARTIFACTORY_NAME="nethogs-6rs-dev_${VERSION}-1_${ARCH}.deb"
 time curl \
 	-H "X-JFrog-Art-Api: ${ARTIFACTORY_PASSWORD}" \
-	-T "pcl_${VERSION}_${ARCH}.deb" \
-	"https://sixriver.jfrog.io/sixriver/debian/pool/main/n/nethogs/${ARTIFACTORY_NAME};deb.name=nethogs-dev;deb.distribution=${DISTRO};deb.component=main;deb.architecture=${ARCH}"
+	-T "nethogs-6rs-dev_${VERSION}_${ARCH}.deb" \
+	"https://sixriver.jfrog.io/sixriver/debian/pool/main/n/nethogs/${ARTIFACTORY_NAME};deb.name=nethogs-6rs-dev;deb.distribution=${DISTRO};deb.component=main;deb.architecture=${ARCH}"
 
 
-export ARTIFACTORY_NAME="nethogs_${VERSION}-1_${ARCH}.deb"
+export ARTIFACTORY_NAME="nethogs-6rs_${VERSION}-1_${ARCH}.deb"
 time curl \
 	-H "X-JFrog-Art-Api: ${ARTIFACTORY_PASSWORD}" \
-	-T "pcl_${VERSION}_${ARCH}.deb" \
-	"https://sixriver.jfrog.io/sixriver/debian/pool/main/n/nethogs/${ARTIFACTORY_NAME};deb.name=nethogs;deb.distribution=${DISTRO};deb.component=main;deb.architecture=${ARCH}"
+	-T "nethogs-6rs_${VERSION}_${ARCH}.deb" \
+	"https://sixriver.jfrog.io/sixriver/debian/pool/main/n/nethogs/${ARTIFACTORY_NAME};deb.name=nethogs-6rs;deb.distribution=${DISTRO};deb.component=main;deb.architecture=${ARCH}"
