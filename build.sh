@@ -21,12 +21,12 @@ checkinstall --pkgname nethogs-6rs --pkgversion ${VERSION} --install=no  -y  --n
 export ARTIFACTORY_NAME="nethogs-6rs-dev_${VERSION}-1_${ARCH}.deb"
 time curl \
 	-H "X-JFrog-Art-Api: ${ARTIFACTORY_PASSWORD}" \
-	-T "nethogs-6rs-dev_${VERSION}_${ARCH}.deb" \
+	-T "nethogs-6rs-dev_${VERSION}-1_${ARCH}.deb" \
 	"https://sixriver.jfrog.io/sixriver/debian/pool/main/n/nethogs/${ARTIFACTORY_NAME};deb.name=nethogs-6rs-dev;deb.distribution=${DISTRO};deb.component=main;deb.architecture=${ARCH}"
 
 
 export ARTIFACTORY_NAME="nethogs-6rs_${VERSION}-1_${ARCH}.deb"
 time curl \
 	-H "X-JFrog-Art-Api: ${ARTIFACTORY_PASSWORD}" \
-	-T "nethogs-6rs_${VERSION}_${ARCH}.deb" \
+	-T "nethogs-6rs_${VERSION}-1_${ARCH}.deb" \
 	"https://sixriver.jfrog.io/sixriver/debian/pool/main/n/nethogs/${ARTIFACTORY_NAME};deb.name=nethogs-6rs;deb.distribution=${DISTRO};deb.component=main;deb.architecture=${ARCH}"
