@@ -1,4 +1,5 @@
-export VERSION := $(shell ./determineVersion.sh)
+# 6RS versions its own for building and this ENV var should be set externally 
+#export VERSION := $(shell ./determineVersion.sh)
 
 #export PREFIX := /usr
 export PREFIX ?= /usr/local
