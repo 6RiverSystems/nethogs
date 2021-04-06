@@ -14,7 +14,7 @@ parallel(
                     withCredentials([string(credentialsId: 'github-access-token', variable: 'GITHUB_TOKEN')]) {
                         sh '''
                         export ARCH='amd64'
-                        export DISTRO='xenial'
+                        export DISTRO='xenial;deb.distribution=bionic'
                         ./build.sh
                         '''
                     } }
@@ -47,14 +47,7 @@ parallel(
                             withCredentials([string(credentialsId: 'github-access-token', variable: 'GITHUB_TOKEN')]) {
                                 sh '''
                                    export ARCH='arm64'
-                                   export DISTRO='xenial'
-                                   ./build.sh
-                                   '''
-                            }
-                            withCredentials([string(credentialsId: 'github-access-token', variable: 'GITHUB_TOKEN')]) {
-                                sh '''
-                                   export ARCH='arm64'
-                                   export DISTRO='bionic'
+                                   export DISTRO='xenial;deb.distribution=bionic'
                                    ./build.sh
                                    '''
                             }
