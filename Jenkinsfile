@@ -39,20 +39,28 @@ parallel(
     "arm64-debian": {
         node('docker && arm64') {
           try {
-            stage("arm64 build ros_comm"){
-                checkout scm
-                docker.image('arm64v8/debian:stretch').inside("-u 0:0 -v ${env.WORKSPACE}:/workspace/src") {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory_apt',
-                        usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD']]) {
-                    withCredentials([string(credentialsId: 'github-access-token', variable: 'GITHUB_TOKEN')]) {
-                        sh '''
-                        export ARCH='arm64'
-                        export DISTRO='xenial'
-                        ./build.sh
-                        '''
-                    } }
+                stage("arm64 build ros_comm"){
+                    checkout scm
+                    docker.image('arm64v8/debian:stretch').inside("-u 0:0 -v ${env.WORKSPACE}:/workspace/src") {
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory_apt',
+                                          usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD']]) {
+                            withCredentials([string(credentialsId: 'github-access-token', variable: 'GITHUB_TOKEN')]) {
+                                sh '''
+                                   export ARCH='arm64'
+                                   export DISTRO='xenial'
+                                   ./build.sh
+                                   '''
+                            }
+                            withCredentials([string(credentialsId: 'github-access-token', variable: 'GITHUB_TOKEN')]) {
+                                sh '''
+                                   export ARCH='arm64'
+                                   export DISTRO='bionic'
+                                   ./build.sh
+                                   '''
+                            }
+                        }
+                    }
                 }
-            }
           } catch (e) {
             echo 'This will run only if failed'
             // Since we're catching the exception in order to report on it,
